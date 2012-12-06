@@ -169,9 +169,14 @@ body { font-family: sans-serif; }
         try {
             var module = Sk.importMainWithBody("<stdin>", false, prog);
         } catch (e) {
+            window.GLOBAL_ERROR = true;
+            hideall();
+            $("#spinner").hide();
+            $("#redo").show();
+            if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
+	    window.GLOBAL_TIMER = false;
             alert(e);
         }
-        window.GLOBAL_TIMER = setTimeout("finalcheck();",1500);
         return false;
     }
 
@@ -189,7 +194,12 @@ body { font-family: sans-serif; }
         return false;
     }
 </script>
-<p><?php echo($QTEXT); ?></p>
+</head>
+<body>
+<div style="padding: 0px 15px 0px 15px;">
+<div class="well">
+<?php echo($QTEXT); ?>
+</div>
 <form>
 <button onclick="runit()" type="button">Check Code</button>
 <?php
@@ -210,7 +220,7 @@ echo("<button onclick=\"window.location='$url';\" type=\"button\">Done</button>\
 <span id="gradebad" style="color:red;display:none"> Error storing grade. </span>
 <br/>
 Enter Your Python Code Here:<br/>
-<textarea id="code" rows="20" cols="80" style="font-family:fixed;font-size:16px;color:blue;width:100%;height:200px;overflow:scroll;">
+<textarea id="code" rows="20" cols="80" style="font-family:fixed;font-size:16px;color:blue;width:99%;height:200px;overflow:scroll;">
 <?php echo($CODE); ?>
 </textarea>
 </form>
@@ -241,7 +251,7 @@ This autograder is based on <a href="http://skulpt.org/" target="_new">Skulpt</a
 </center>
 <?php
 
-print "<pre>\n";
+print "<!--\n";
 print "Context Information:\n\n";
 print $context->dump();
 
@@ -251,18 +261,8 @@ foreach($_SESSION as $key => $value ) {
     if (get_magic_quotes_gpc()) $value = stripslashes($value);
     print "$key=$value (".mb_detect_encoding($value).")\n";
 }
-print "</pre>";
+print "-->";
 
-  $domain = $_SERVER["REMOTE_ADDR"];
-  $netfactlog = "/kunden/homepages/17/d88943663/htdocs/autolog.txt";
-
-  if ( fexist('/kunden/homepages/17/d88943663/htdocs/') ) {
-        $handle = fopen($netfactlog, 'a');
-        $icount = 0;
-        if ( $handle ) {
-                fwrite($handle, $domain."@".date('r')."@".$ex."\n");
-                fclose($handle);
-        }
-    }
 ?>
-
+</div>
+</body>

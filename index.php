@@ -4,6 +4,7 @@
 <?php require_once "header.php"; ?>
 </head>
 <body>
+<div style="padding: 0px 15px 0px 15px;">
 <h1>Prototype AutoGrader for Python for Informatics</h1>
 <p>
 Welcome to my *very early* protype auto-grader for Python using the 
@@ -16,10 +17,10 @@ I am preparing this as an expereimnt for my SI301 course in January.
 Send comments to Dr. Chuck.
 </p>
 <ul class="nav nav-pills nav-stacked">
-
+<li><a href="auto.php">Counting the lines in a file</a></li>
 <li><a href="auto.php?exercise=2.2">Exercise 2.2</a></li>
 <li><a href="auto.php?exercise=2.3">Exercise 2.3</a></li>
-<li><a href="auto.php">Counting the lines in a file</a></li>
+<li><a href="auto.php?exercise=loop">For loop</a></li>
 </ul>
 <p>
 Unlike 
@@ -35,3 +36,5 @@ Soon this will work with
 <a href="http://developers.imsglobal.org" target="_new">IMS Learning Tools Interoperability</a>
 and will send grades back to an LMS automatically when the student completes the task.
 </p>
+</div>
+</body>
