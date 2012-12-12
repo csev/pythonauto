@@ -5,15 +5,17 @@
 </head>
 <body>
 <div style="padding: 0px 15px 0px 15px;">
-<h1>Prototype AutoGrader for Python for Informatics</h1>
+<h1>AutoGrader for Python for Informatics</h1>
 <p>
 Welcome to my *very early* protype auto-grader for Python using the 
 <a href="http://www.skulpt.org" target="_new">Skulpt</a> in-browser
 Python execution environment from <a href="https://twitter.com/bnmnetp" target="_new">
-Brad Miller</a>.
+Brad Miller</a>
+for my 
+<a href="http://www.py4inf.com/" target="_new">Python for Informatics</a> book.
 </p>
 <p>
-I am preparing this as an expereimnt for my SI301 course in January.  
+I am preparing this as an experimental MOOC for my SI301 course in January.  
 Send comments to Dr. Chuck.
 </p>
 <ul class="nav nav-pills nav-stacked">
@@ -35,6 +37,10 @@ in their assignments for grading here.
 Soon this will work with 
 <a href="http://developers.imsglobal.org" target="_new">IMS Learning Tools Interoperability</a>
 and will send grades back to an LMS automatically when the student completes the task.
+</p>
+<p>
+This is open source and the code is here avaiable on
+<a href="https://github.com/csev/pythonauto" target="_new">Github</a>.
 </p>
 </div>
 </body>
