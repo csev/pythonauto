@@ -103,7 +103,13 @@ body { font-family: sans-serif; }
         $("#spinner").hide();
         var prog = document.getElementById("code").value;
         for ( var key in window.CHECKS ) {
-            if ( prog.indexOf(key) >= 0 ) continue;
+            // The key can be inverted if the first character is !
+            if ( key.length > 1 && key.substring(0,1) == '!' ) {
+                xkey = key.substring(1);
+                if ( prog.indexOf(xkey) < 0 ) continue;
+            } else {
+                if ( prog.indexOf(key) >= 0 ) continue;
+            }
             alert(window.CHECKS[key]);
             window.GLOBAL_ERROR = true;
             break;
@@ -174,7 +180,7 @@ body { font-family: sans-serif; }
             $("#spinner").hide();
             $("#redo").show();
             if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
-	    window.GLOBAL_TIMER = false;
+            window.GLOBAL_TIMER = false;
             alert(e);
         }
         return false;
