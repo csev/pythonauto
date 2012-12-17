@@ -52,27 +52,13 @@ try {
     $retval = $e->getMessage();
 }
 
-echo("\n<pre>\n");
-echo("Service Url:\n");
-echo(htmlentities($endpoint)."\n\n");
-print_r($retval);
-echo("\n");
-echo("------------ POST RETURNS ------------\n");
-$response = str_replace("><","&gt;\n&lt;",$response);
-$response = str_replace("<","&lt;",$response);
-$response = str_replace(">","&gt;",$response);
-echo($response);
-
-echo("\n\n------------ WE SENT ------------\n");
-$postBody = str_replace("<","&lt;",$postBody);
-$postBody = str_replace(">","&gt;",$postBody);
-echo($postBody);
-echo("\nBase String:\n");
-echo($lbs);
-echo("\n</pre>\n");
-
-
+$debug = Array("endpoint" => $endpoint,
+"retval" => $retval,
+"wesent" => $postBody,
+"wegot" => $response,
+"base" => $lbs);
 
 $retval = Array("status" => "success");
+if ( isset($_GET["debug"]) ) $retval['debug'] = $debug;
 echo json_encode($retval);
 ?>

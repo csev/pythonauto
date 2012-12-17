@@ -188,6 +188,7 @@ body { font-family: sans-serif; }
 
     function gradeit() {
         $("#check").hide();
+        $("#spinner").show();
         $.getJSON('<? echo $context->addSession('grade.php'); ?>', function(data) {
             console.log(data);
             $("#spinner").hide();
@@ -214,10 +215,12 @@ if ( $context->valid && $context->getOutcomeService() !== false ) {
 <button id="grade" onclick="gradeit()" type="button" style="display:none">Submit Grade</button>
 <?php } ?>
 <?php
-$url = false;
-if ( $context->valid ) $url = $context->getReturnUrl();
-if ( $url === false ) $url = 'index.php';
-echo("<button onclick=\"window.location='$url';\" type=\"button\">Done</button>\n");
+// $url = false;
+// if ( $context->valid ) $url = $context->getReturnUrl();
+// if ( $url === false ) $url = 'index.php';
+if ( ! $context->valid ) {
+  echo("<button onclick=\"window.location='$url';\" type=\"button\">Done</button>\n");
+}
 ?>
 <img id="spinner" src="dist/spinner.gif" style="vertical-align: middle;display: none">
 <span id="redo" style="color:red;display:none"> Please Correct your code and re-run. </span>
