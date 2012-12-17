@@ -22,7 +22,7 @@ if ( ! is_lti_request() ) {
     if ( isset($_POST['oauth_consumer_key']) ) {
         $oauth_comsumer_key = $_POST['oauth_consumer_key'];
         require_once 'keys.php';
-        if ( ! isset($LTI_KEYS[$oauth_consumer_key]) ) $oauth_consumer_secret = $LTI_KEYS[$oauth_consumer_key];
+        if ( isset($LTI_KEYS[$oauth_consumer_key]) ) $oauth_consumer_secret = $LTI_KEYS[$oauth_consumer_key];
     }
     // Initialize, all secrets are 'secret', set session, and do not redirect
     $context = new BLTI($oauth_consumer_secret, true, false);

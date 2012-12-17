@@ -1,8 +1,17 @@
 <?php
 
 $EXERCISES = Array(
+"hello" => Array (
+"qtext" => "Write a program that uses a <b>print</b> statement to say 'Hello World'
+as shown below.",
+"desired" => "Hello World",
+"code" => 'print "Hello World"',
+"checks" => Array(
+"print" => "You must use a print statement within the loop."
+)),
+
 "loop" => Array (
-"qtext" => "Write a program that used a <b>for</b> loop  and the built-in function 
+"qtext" => "Write a program that uses a <b>for</b> loop  and the built-in function 
 <b>range</b> to write out three numbers as shown below.",
 "desired" => "0
 1
