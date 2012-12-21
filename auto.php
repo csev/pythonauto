@@ -26,6 +26,10 @@ if ( ! is_lti_request() ) {
     }
     // Initialize, all secrets are 'secret', set session, and do not redirect
     $context = new BLTI($oauth_consumer_secret, true, false);
+    if ( ! $context->valid ) {
+        echo("<h1>Error: Incorrect LTI secret</h1>");
+        return;
+    }
     $_SESSION['oauth_consumer_secret'] = $oauth_consumer_secret;
     $_SESSION['oauth_consumer_key'] = $oauth_consumer_key;
 }

@@ -39,11 +39,13 @@ name = raw_input("Enter your name")',
 "2.3" => Array(
 "qtext" => "Write a program to prompt the user for hours and rate per hour using raw_input
 to compute gross pay.  Use 35 hours and a rate of 2.75 per hour to test the 
-program (the pay should be 96.25).",
+program (the pay should be 96.25).  You should use <b>raw_input</b> to 
+read a string and <b>float()</b> to convert the string to a number.
+Do not worry about error checking.",
 "desired" => "Pay: 96.25",
 "code" => '# This first line is provided for you
 
-name = raw_input("Enter Hours:")',
+hrs = raw_input("Enter Hours:")',
 "checks" => Array(
 "raw_input" => "You must prompt the pay and rate using the raw_input() function.",
 "print" => "You must use the print statement to print the output.",
