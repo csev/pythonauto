@@ -681,59 +681,6 @@ function handleOAuthBodyPOST($oauth_consumer_key, $oauth_consumer_secret)
     return $postdata;
 }
 
-// From: http://php.net/manual/en/function.file-get-contents.php
-function post_socket_xml($endpoint, $data, $moreheaders=false) {
-    $url = parse_url($endpoint);
-
-    if (!isset($url['port'])) {
-      if ($url['scheme'] == 'http') { $url['port']=80; }
-      elseif ($url['scheme'] == 'https') { $url['port']=443; }
-    }
-
-    $url['query']=isset($url['query'])?$url['query']:'';
-
-    $hostport = ':'.$url['port'];
-    if ($url['scheme'] == 'http' && $hostport == ':80' ) $hostport = '';
-    if ($url['scheme'] == 'https' && $hostport == ':443' ) $hostport = '';
-
-    $url['protocol']=$url['scheme'].'://';
-    $eol="\r\n";
-
-  $uri = "/";
-  if ( isset($url['path'])) $uri = $url['path'];
-  if ( strlen($url['query']) > 0 ) $uri .= '?'.$url['query'];
-  if ( strlen($url['fragment']) > 0 ) $uri .= '#'.$url['fragment'];
-
-    $headers =  "POST ".$uri." HTTP/1.0".$eol.
-                "Host: ".$url['host'].$hostport.$eol.
-                "Referer: ".$url['protocol'].$url['host'].$url['path'].$eol.
-                "Content-Length: ".strlen($data).$eol;
-  if ( is_string($moreheaders) ) $headers .= $moreheaders;
-  $len = strlen($headers);
-  if ( substr($headers,$len-2) != $eol ) {
-        $headers .= $eol;
-  }
-    $headers .= $eol.$data;
-  // echo("\n"); echo($headers); echo("\n");
-    // echo("PORT=".$url['port']);
-    try {
-      $fp = fsockopen($url['host'], $url['port'], $errno, $errstr, 30);
-      if($fp) {
-        fputs($fp, $headers);
-        $result = '';
-        while(!feof($fp)) { $result .= fgets($fp, 128); }
-        fclose($fp);
-        //removes headers
-        $pattern="/^.*\r\n\r\n/s";
-        $result=preg_replace($pattern,'',$result);
-        return $result;
-      }
-  } catch(Exception $e) {
-    return false;
-  }
-  return false;
-}
-
 function sendOAuthBodyPOST($method, $endpoint, $oauth_consumer_key, $oauth_consumer_secret, $content_type, $body)
 {
     $hash = base64_encode(sha1($body, TRUE));
@@ -754,9 +701,6 @@ function sendOAuthBodyPOST($method, $endpoint, $oauth_consumer_key, $oauth_consu
 
     $header = $acc_req->to_header();
     $header = $header . "\r\nContent-Type: " . $content_type . "\r\n";
-
-    $response = post_socket_xml($endpoint,$body,$header);
-    if ( $response !== false && strlen($response) > 0) return $response;
 
     $params = array('http' => array(
         'method' => 'POST',

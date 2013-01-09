@@ -2,10 +2,10 @@
 
 $EXERCISES = Array(
 "hello" => Array (
-"qtext" => "Write a program that uses a <b>print</b> statement to say 'Hello World'
+"qtext" => "Write a program that uses a <b>print</b> statement to say 'hello world'
 as shown below.",
-"desired" => "Hello World",
-"code" => 'print "Hello World"',
+"desired" => "hello world",
+"code" => 'prinq "hello world"',
 "checks" => Array(
 "print" => "You must use a print statement within the loop."
 )),
