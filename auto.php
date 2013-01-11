@@ -74,8 +74,6 @@ $DESIRED = rtrim($DESIRED);
 body { font-family: sans-serif; }
 </style>
 <script src="dist/skulpt.js" type="text/javascript"></script>
-<!--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>-->
 <script src="dist/jquery.min.js" type="text/javascript"></script> 
 <script type="text/javascript">
 <?php
@@ -204,14 +202,29 @@ body { font-family: sans-serif; }
         });
         return false;
     }
+
+$(document).ready( function() {
+	$doc = $(window).height();
+	$it = $("#inputs").offset().top;
+	$fh = $("#footer").height();
+	$avail = $doc - $it - $fh + 10;
+	if ( $avail < 500 ) $avail = 500;
+	if ( $avail > 900 ) $avail = 900;
+	$ih = $avail * 0.6;
+	$("#inputs").height($ih);
+	$("#outputs").height($avail*0.4);
+	$ct = $('#code').offset().top;
+	$('#code').height($ih - ($ct - $it)-15);$
+} );
 </script>
 </head>
 <body>
 <div style="padding: 0px 15px 0px 15px;">
+<div id="inputs" style="height:300px; min-height:200px;">
 <div class="well">
 <?php echo($QTEXT); ?>
 </div>
-<form>
+<form style="height:100%;">
 <button onclick="runit()" type="button">Check Code</button>
 <?php
 if ( $context->valid && $context->getOutcomeService() !== false ) {
@@ -219,10 +232,8 @@ if ( $context->valid && $context->getOutcomeService() !== false ) {
 <button id="grade" onclick="gradeit()" type="button" style="display:none">Submit Grade</button>
 <?php } ?>
 <?php
-// $url = false;
-// if ( $context->valid ) $url = $context->getReturnUrl();
-// if ( $url === false ) $url = 'index.php';
-if ( ! $context->valid ) {
+if ( ! $context->valid && isset($_GET["done"]) ) {
+  $url = $_GET['done'];
   echo("<button onclick=\"window.location='$url';\" type=\"button\">Done</button>\n");
 }
 ?>
@@ -233,19 +244,21 @@ if ( ! $context->valid ) {
 <span id="gradebad" style="color:red;display:none"> Error storing grade. </span>
 <br/>
 Enter Your Python Code Here:<br/>
-<textarea id="code" rows="20" cols="80" style="font-family:fixed;font-size:16px;color:blue;width:99%;height:200px;overflow:scroll;">
+<textarea id="code" cols="80" style="font-family:fixed;font-size:16px;color:blue;width:99%;">
 <?php echo($CODE); ?>
 </textarea>
 </form>
-
-<div id=left" style="width:50%;float:right;overflow:scroll;border:1px solid black">
+</div>
+<div id="outputs" style="height:300px; min-height:200px;">
+<div id="left" style="width:50%;float:right;height:100%;overflow:scroll;border:1px solid black">
 <b>Desired Output</b>
-<pre id="desired" style="height:200px"><?php echo($DESIRED); echo("\n"); ?>
+<pre id="desired" style="height:100%"><?php echo($DESIRED); echo("\n"); ?>
 </pre>
 </div>
-<div id=left" style="width:49%;float:left;overflow:scroll;border:1px solid black">
+<div id="right" style="width:49%;height:100%;float:left;overflow:scroll;border:1px solid black">
 <b>Your Output</b>
-<pre id="output" style="height:200px;"></pre>
+<pre id="output" style="height:100%;"></pre>
+</div>
 </div>
 
 <div id="mbox-short.txt" style="display:none"><?php
@@ -258,10 +271,12 @@ while (!feof($fh)) {
 }
 fclose($fh);
 ?></div>
+<div id="footer">
 <br clear="all"/>
 <center>
 This autograder is based on <a href="http://skulpt.org/" target="_new">Skulpt</a>.
 </center>
+</div>
 <?php
 
 print "<!--\n";
