@@ -293,7 +293,7 @@ print "\nSESSION Parameters:\n\n";
 ksort($_SESSION);
 foreach($_SESSION as $key => $value ) {
     if (get_magic_quotes_gpc()) $value = stripslashes($value);
-    print "$key=$value (".mb_detect_encoding($value).")\n";
+    if ( is_string($value) ) print "$key=$value (".mb_detect_encoding($value).")\n";
 }
 print "-->";
 

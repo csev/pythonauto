@@ -81,7 +81,7 @@ Score    Grade<br/>
 >= 0.7     C<br/>
 >= 0.6     D<br/>
 < 0.6      F<br/>
-Is the user enters bad data or a value out of range, 
+If the user enters bad data or a value out of range, 
 print a suitable error message and exit.
 For the test, enter a score of 0.85.",
 "desired" => "B",
@@ -94,6 +94,31 @@ For the test, enter a score of 0.85.",
 "elif" => "You should use an elif statement to check the value of the score.",
 "try" => "You should use a try/except block to deal with bad data entered from the user",
 "except" => "You should use a try/except block to deal with bad data entered from the user")
+),
+
+"4.6" => Array(
+"qtext" => "<b>4.6</b> Write a program to prompt the user for hours and rate per hour using raw_input
+to compute gross pay.  Award time-and-a-half for the hourly rate for all hours 
+worked above 40 hours.  
+Put the logic to do the computation of time-and-a-half in a function called <b>computepay()</b>
+and use the function to do the computation.  The function should return a value.
+Use 45 hours and a rate of 10.00 per hour to test the 
+program (the pay should be 475.0).  You should use <b>raw_input</b> to 
+read a string and <b>float()</b> to convert the string to a number.
+Do not worry about error checking the user input unless you want to - 
+you can assume the user types numbers properly.",
+"desired" => "Pay: 475.0",
+"code" => 'hrs = raw_input("Enter Hours:")
+h = float(hrs)',
+"checks" => Array(
+"raw_input" => "You must prompt the pay and rate using the raw_input() function.",
+"print" => "You must use the print statement to print the output.",
+"if" => "You should use an if statement to decide to to the overtime computation or not.",
+"float" => "You should use the built-in float() function to convert from a string to a float.",
+"def" => "You must use a function called computepay to do the computation.",
+"return" => "You must use a function called computepay to do the computation.",
+"computepay" => "You must use a function called computepay to do the computation.",
+"!475.0" => "You must actually calculate the pay.")
 )
 
 );
