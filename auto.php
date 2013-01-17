@@ -169,20 +169,26 @@ body { font-family: sans-serif; }
     function runit()
     {
         hideall();
-        $("#spinner").show();
         var prog = document.getElementById("code").value;
+        if ( prog.length < 1 ) {
+            alert("You do not have any Python code");
+            return false;
+        }
+        $("#spinner").show();
         var output = document.getElementById("output");
         output.innerHTML = '';
+        if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
+        window.GLOBAL_TIMER = setTimeout("finalcheck();",2500);
         Sk.configure({output:outf});
         try {
             var module = Sk.importMainWithBody("<stdin>", false, prog);
         } catch (e) {
+            if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
+            window.GLOBAL_TIMER = false;
             window.GLOBAL_ERROR = true;
             hideall();
             $("#spinner").hide();
             $("#redo").show();
-            if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
-            window.GLOBAL_TIMER = false;
             alert(e);
         }
         return false;
@@ -221,7 +227,7 @@ $(document).ready( function() {
 <body>
 <div style="padding: 0px 15px 0px 15px;">
 <div id="inputs" style="height:300px; min-height:200px;">
-<div class="well">
+<div class="well" style="background-color: #EEE8AA">
 <?php echo($QTEXT); ?>
 </div>
 <form style="height:100%;">
@@ -250,12 +256,12 @@ Enter Your Python Code Here:<br/>
 </form>
 </div>
 <div id="outputs" style="height:300px; min-height:200px;">
-<div id="left" style="width:50%;float:right;height:100%;overflow:scroll;border:1px solid black">
+<div id="left" style="padding:8px;width:48%;float:right;height:100%;overflow:scroll;border:1px solid black">
 <b>Desired Output</b>
 <pre id="desired" style="height:100%"><?php echo($DESIRED); echo("\n"); ?>
 </pre>
 </div>
-<div id="right" style="width:49%;height:100%;float:left;overflow:scroll;border:1px solid black">
+<div id="right" style="padding: 8px;width:48%;height:100%;float:left;overflow:scroll;border:1px solid black">
 <b>Your Output</b>
 <pre id="output" style="height:100%;"></pre>
 </div>
