@@ -257,12 +257,12 @@ Enter Your Python Code Here:<br/>
 </form>
 </div>
 <div id="outputs" style="height:300px; min-height:200px;">
-<div id="left" style="padding:8px;width:48%;float:right;height:100%;overflow:scroll;border:1px solid black">
+<div id="left" style="padding:8px;width:47%;float:right;height:100%;overflow:scroll;border:1px solid black">
 <b>Desired Output</b>
 <pre id="desired" style="height:100%"><?php echo($DESIRED); echo("\n"); ?>
 </pre>
 </div>
-<div id="right" style="padding: 8px;width:48%;height:100%;float:left;overflow:scroll;border:1px solid black">
+<div id="right" style="padding: 8px;width:47%;height:100%;float:left;overflow:scroll;border:1px solid black">
 <b>Your Output</b>
 <pre id="output" style="height:100%;"></pre>
 </div>
