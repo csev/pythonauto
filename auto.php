@@ -211,22 +211,23 @@ body { font-family: sans-serif; }
 
 $(document).ready( function() {
 	$doc = $(window).height();
-	$it = $("#inputs").offset().top;
 	$fh = $("#footer").height();
-	$avail = $doc - $it - $fh + 10;
-	if ( $avail < 500 ) $avail = 500;
-	if ( $avail > 900 ) $avail = 900;
-	$ih = $avail * 0.6;
-	$("#inputs").height($ih);
-	$("#outputs").height($avail*0.4);
+	$it = $('#inputs').offset().top;
 	$ct = $('#code').offset().top;
-	$('#code').height($ih - ($ct - $it)-15);$
+    $qh = $ct - $it;
+	$avail = $doc - $ct - $fh;
+	if ( $avail < 400 ) $avail = 400;
+	if ( $avail > 900 ) $avail = 900;
+	$ch = $avail * 0.5;
+	$("#inputs").height($qh+$ch);
+	$("#outputs").height($avail*0.5);
+	$('#code').height($ch -15);
 } );
 </script>
 </head>
 <body>
 <div style="padding: 0px 15px 0px 15px;">
-<div id="inputs" style="height:300px; min-height:200px;">
+<div id="inputs" style="height:300px;">
 <div class="well" style="background-color: #EEE8AA">
 <?php echo($QTEXT); ?>
 </div>

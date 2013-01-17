@@ -43,7 +43,7 @@ print "Howdy"',
 to compute gross pay.  Use 35 hours and a rate of 2.75 per hour to test the 
 program (the pay should be 96.25).  You should use <b>raw_input</b> to 
 read a string and <b>float()</b> to convert the string to a number.
-Do not worry about error checking.",
+Do not worry about error checking or bad user data.",
 "desired" => "Pay: 96.25",
 "code" => '# This first line is provided for you
 
@@ -59,9 +59,12 @@ hrs = raw_input("Enter Hours:")',
 "qtext" => "<b>3.1</b> Write a program to prompt the user for hours and rate per hour using raw_input
 to compute gross pay.  Award time-and-a-half for the hourly rate for all hours 
 worked above 40 hours.  Use 45 hours and a rate of 10.00 per hour to test the 
-program (the pay should be 475.0).  You should use <b>raw_input</b> to 
+program (the pay should be 475).  You should use <b>raw_input</b> to 
 read a string and <b>float()</b> to convert the string to a number.
-Do not worry about error checking the user input - assume the user types numbers properly.",
+Do not worry about error checking the user input - assume the user types numbers properly.
+<br/>
+<b>Note:</b> The autograder does not handle try/except well so you should turn in code without try/except.
+",
 "desired" => "Pay: 475",
 "code" => 'hrs = raw_input("Enter Hours:")
 h = float(hrs)',
@@ -81,9 +84,11 @@ Score    Grade<br/>
 >= 0.7     C<br/>
 >= 0.6     D<br/>
 < 0.6      F<br/>
-If the user enters bad data or a value out of range, 
-print a suitable error message and exit.
-For the test, enter a score of 0.85.",
+If the user enters a value out of range, print a suitable error message and exit.
+For the test, enter a score of 0.85.
+<br/>
+<b>Note:</b> The autograder does not handle try/except well so you should turn in code without try/except.
+",
 "desired" => "B",
 "code" => '',
 "checks" => Array(
@@ -91,9 +96,7 @@ For the test, enter a score of 0.85.",
 "float" => "You should use the built-in float() function to convert from a string to a float.",
 "print" => "You must use the print statement to print the output.",
 "if" => "You should use an if statement to check the value of the score.",
-"elif" => "You should use an elif statement to check the value of the score.",
-"try" => "You should use a try/except block to deal with bad data entered from the user",
-"except" => "You should use a try/except block to deal with bad data entered from the user")
+"elif" => "You should use an elif statement to check the value of the score.")
 ),
 
 "4.6" => Array(
@@ -106,7 +109,10 @@ Use 45 hours and a rate of 10.00 per hour to test the
 program (the pay should be 475.0).  You should use <b>raw_input</b> to 
 read a string and <b>float()</b> to convert the string to a number.
 Do not worry about error checking the user input unless you want to - 
-you can assume the user types numbers properly.",
+you can assume the user types numbers properly.
+<br/>
+<b>Note:</b> The autograder does not handle try/except well so you should turn in code without try/except.
+",
 "desired" => "Pay: 475",
 "code" => 'hrs = raw_input("Enter Hours:")
 h = float(hrs)',
