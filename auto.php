@@ -73,8 +73,8 @@ $DESIRED = rtrim($DESIRED);
 <style>
 body { font-family: sans-serif; }
 </style>
-<script src="dist/skulpt.js?v=3" type="text/javascript"></script>
-<script src="dist/jquery.min.js?v=3" type="text/javascript"></script> 
+<script src="dist/skulpt.js?v=4" type="text/javascript"></script>
+<script src="dist/jquery.min.js?v=4" type="text/javascript"></script> 
 <script type="text/javascript">
 <?php
     if ( $CHECKS === false ) {
