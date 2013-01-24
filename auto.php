@@ -76,6 +76,33 @@ body { font-family: sans-serif; }
 <script src="dist/skulpt.js?v=7" type="text/javascript"></script>
 <script src="dist/jquery.min.js?v=7" type="text/javascript"></script> 
 <script type="text/javascript">
+
+function makefilediv(name,text) {
+    var msgContainer = document.createElement('div');
+    msgContainer.setAttribute('id', name);  //set id
+    msgContainer.setAttribute('style', 'display:none');  //set CSS
+    text.replace("&","&amp;");
+    text.replace("<","&lt;");
+
+    var msg2 = document.createTextNode(text);
+    msgContainer.appendChild(msg2);
+    document.body.appendChild(msgContainer);
+}
+
+// May want this under the control of the exercises.
+// Instead of always retrieving them
+$(document).ready( function() {
+    $.get('romeo.txt', function(data) {
+        makefilediv('romeo.txt', data);
+    });
+    $.get('words.txt', function(data) {
+        makefilediv('words.txt', data);
+    });
+    $.get('mbox-short.txt', function(data) {
+        makefilediv('mbox-short.txt', data);
+    });
+});
+
 <?php
     if ( $CHECKS === false ) {
         echo("   window.CHECKS = false;\n");
@@ -224,6 +251,15 @@ $(document).ready( function() {
 	$('#code').height($ch -15);
 } );
 </script>
+<style>
+pre {
+white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+white-space: -pre-wrap; /* Opera 4 - 6 */
+white-space: -o-pre-wrap; /* Opera 7 */
+white-space: pre-wrap; /* CSS3 */
+word-wrap: break-word; /* IE 5.5+ */
+}
+</style>
 </head>
 <body>
 <div style="padding: 0px 15px 0px 15px;">
@@ -267,27 +303,6 @@ Enter Your Python Code Here:<br/>
 <pre id="output" style="height:100%;"></pre>
 </div>
 </div>
-
-<div id="mbox-short.txt" style="display:none"><?php
-$fh = fopen("mbox-short.txt","r");
-while (!feof($fh)) {
-   $line = fgets($fh);
-   $line = str_replace("&","&amp;",$line);
-   $line = str_replace("<","&lt;",$line);
-   echo $line;
-}
-fclose($fh);
-?></div>
-<div id="words.txt" style="display:none"><?php
-$fh = fopen("words.txt","r");
-while (!feof($fh)) {
-   $line = fgets($fh);
-   $line = str_replace("&","&amp;",$line);
-   $line = str_replace("<","&lt;",$line);
-   echo $line;
-}
-fclose($fh);
-?></div>
 <div id="footer">
 <br clear="all"/>
 <center>

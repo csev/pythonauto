@@ -226,6 +226,33 @@ print "Done"
 "float" => "You should use the float() function to convert from a string to an integer.",
 '!18518' =>  "You must actually pull the data from the strings and convert it.",
 "/" => "Average is usually a total / count.")
+),
+
+"8.4" => Array(
+"qtext" => "<b>8.4</b> Open the file <b>romeo.txt</b> and read it line by
+line.  For each line, split the line into a list of words using the <b>split()</b>
+function.   The program should build a list of words.  For each word on each line
+check to see if the word is already in the list and if not append it to the list.
+At the end of the program print out the list.",
+"desired" => "['But', 'soft', 'what', 'light', 'through', 'yonder', 'window', 'breaks', 'It', 'is', 'the', 'east', 'and', 'Juliet', 'sun', 'Arise', 'fair', 'kill', 'envious', 'moon', 'Who', 'already', 'sick', 'pale', 'with', 'grief']",
+"code" => 'fname = raw_input("Enter file name: ")
+fh = open(fname)
+lst = []
+for line in fh:
+    words = line.split()
+    for word in words:
+        if word in lst: continue
+        lst.append(word)
+print lst
+',
+"checks" => Array(
+"raw_input" => "You must prompt for the file name using the raw_input() function.",
+"open" => "You need to use open() to open the file.",
+"find" => "You should use the find function to get the position of the colon in the string.",
+":" => "You should use string slicing [n:m] to extract data from the string.",
+"float" => "You should use the float() function to convert from a string to an integer.",
+'!18518' =>  "You must actually pull the data from the strings and convert it.",
+"/" => "Average is usually a total / count.")
 )
 
 );
