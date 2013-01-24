@@ -278,6 +278,16 @@ while (!feof($fh)) {
 }
 fclose($fh);
 ?></div>
+<div id="words.txt" style="display:none"><?php
+$fh = fopen("words.txt","r");
+while (!feof($fh)) {
+   $line = fgets($fh);
+   $line = str_replace("&","&amp;",$line);
+   $line = str_replace("<","&lt;",$line);
+   echo $line;
+}
+fclose($fh);
+?></div>
 <div id="footer">
 <br clear="all"/>
 <center>
