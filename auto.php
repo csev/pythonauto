@@ -73,8 +73,8 @@ $DESIRED = rtrim($DESIRED);
 <style>
 body { font-family: sans-serif; }
 </style>
-<script src="dist/skulpt.js?v=7" type="text/javascript"></script>
-<script src="dist/jquery.min.js?v=7" type="text/javascript"></script> 
+<script src="dist/skulpt.js?v=8" type="text/javascript"></script>
+<script src="dist/jquery.min.js?v=8" type="text/javascript"></script> 
 <script type="text/javascript">
 
 function makefilediv(name,text) {
