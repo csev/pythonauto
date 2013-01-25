@@ -324,6 +324,46 @@ print "There were", count, "lines in the file with From as the first word"
 "if" => "You need to use one or more if statements to skip the lines that do not start with 'From '.",
 "raw_input" => "You should prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.")
+),
+
+"9.4" => Array(
+"qtext" => "<b>9.4</b> Write a program to read through the <b>mbox-short.txt</b> and figure
+out who has the most commits.  The program looks for 'From ' lines and takes the second
+word of those lines as the person who sent the mail.  The program creates a Python 
+dictionary that maps the senders mail address to a count of the number of times
+they appear in the file.  After the dictionary is produced, the program reads through
+the dictionary using a maximum loop to finx the most prolific committer.",
+"desired" => "cwen@iupui.edu 5",
+"code" => 'name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+',
+"xcode" => 'name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+counts = dict()
+for line in handle:
+    wds = line.split()
+    if len(wds) < 2 : continue
+    if wds[0] != "From" : continue
+    email = wds[1]
+    counts[email] = counts.get(email,0) + 1
+
+bigcount = None
+bigname = None
+for name,count in counts.items():
+    if bigname is None or count > bigcount:
+        bigname = name
+        bigcount = count
+
+print bigname, bigcount
+',
+"checks" => Array(
+"for" => "You need a for loop to read the lines in the file.",
+"split" => "You should use split() to break each line into words.",
+"if" => "You need to use one or more if statements to skip the lines that do not start with 'From '.",
+"raw_input" => "You should prompt for the file name using the raw_input() function.",
+"open" => "You need to use open() to open the file.")
 )
 
 

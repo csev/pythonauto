@@ -61,7 +61,7 @@ if ( isset($_REQUEST["exercise"]) ) {
     $ex = $_REQUEST["exercise"];
     $EX = false;
     if ( isset($EXERCISES[$ex]) ) $EX = $EXERCISES[$ex];
-    if ( $EX === false ) {
+    if ( $EX !== false ) {
         $CODE = '';
         $QTEXT = $EX["qtext"];
         $DESIRED = $EX["desired"];
