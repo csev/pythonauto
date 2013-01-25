@@ -1,6 +1,7 @@
 <?php
 
-$EXERCISES = Array(
+$EXERCISES = 
+Array(
 "hello" => Array (
 "qtext" => "Write a program that uses a <b>print</b> statement to say 'hello world'
 as shown below.",
@@ -35,6 +36,7 @@ name = raw_input("Enter your name")
 print "Howdy"',
 "checks" => Array(
 "raw_input" => "You must prompt for the user's name using the raw_input() function.",
+"!Sarah" => "You must actually prompt for the user's name",
 "print" => "You must use the print statement to print the line of output."
 )),
 
@@ -191,8 +193,12 @@ COMPUTER TO DO TASKS ON OUR BEHALF THAT WERE REPTITIVE
 INTERESTINGLY, THE KINDS OF THINGS COMPUTERS CAN DO BEST
 ARE OFTEN THE KINDS OF THINGS THAT WE HUMANS FIND BORING
 AND MIND-NUMBING",
-"code" => 'fh = open("words.txt")
-text = fh.read()
+"code" => 'fname = raw_input("Enter file name: ")
+fh = open(fname)
+',
+"xcode" => 'fname = raw_input("Enter file name: ")
+fh = open(fname)
+text = fh.read().strip()
 print text.upper()
 ',
 "checks" => Array(
@@ -391,6 +397,61 @@ as shown below.",
 "code" => 'name = raw_input("Enter file:")
 if len(name) < 1 : name = "mbox-short.txt"
 handle = open(name)
+',
+"xcode" => 'name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+counts = dict()
+for line in handle:
+    wds = line.split()
+    if len(wds) < 5 : continue
+    if wds[0] != "From" : continue
+    when = wds[5]
+    tics = when.split(":")
+    if len(tics) != 3 : continue
+    hour = tics[0]
+    counts[hour] = counts.get(hour,0) + 1
+
+lst = counts.items()
+lst.sort()
+
+for key, val in lst :
+    print key, val
+',
+"checks" => Array(
+"for" => "You need a for loop to read the lines in the file.",
+"sort" => "You need to use list sort() method to sort the list of times.") 
+),
+
+"11.1" => Array (
+"qtext" => '<b>11.1</b> Sadly, the autograder does not support the regular expression library.
+So please write a program that computes the 
+<b>Answer to the Ultimate Question of Life, the Universe, and Everything</b>
+[<a href="http://www.youtube.com/watch?v=aboZctrHfK8" target="_blank">more detail</a>].
+Sample output is below.',
+"desired" => "42",
+"code" => '',
+"checks" => Array(
+"print" => "By now you should know that a print statement would be helpful here.",
+"*" => "I think that multiplication is involved..."
+)),
+
+"11.9" => Array(
+"qtext" => "<b>11.9</b> Write a program to prompt the user for a regular expression
+and read through the <b>mbox-short.txt</b> and count the number of lines that match
+the regular expression using re.search().",
+"desired" => "04 3
+19 1",
+"code" => 'import re
+
+string = raw_input("Enter a regular expression:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open("mbox-short.txt")
+count = 0
+for line in handle:
+    if re.search(string) : count = count + 1
+print "mbox-short.txt had ", count, "lines that matched", string
+
 ',
 "xcode" => 'name = raw_input("Enter file:")
 if len(name) < 1 : name = "mbox-short.txt"
