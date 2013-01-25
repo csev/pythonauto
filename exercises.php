@@ -332,7 +332,7 @@ out who has the most commits.  The program looks for 'From ' lines and takes the
 word of those lines as the person who sent the mail.  The program creates a Python 
 dictionary that maps the senders mail address to a count of the number of times
 they appear in the file.  After the dictionary is produced, the program reads through
-the dictionary using a maximum loop to finx the most prolific committer.",
+the dictionary using a maximum loop to find the most prolific committer.",
 "desired" => "cwen@iupui.edu 5",
 "code" => 'name = raw_input("Enter file:")
 if len(name) < 1 : name = "mbox-short.txt"
@@ -364,6 +364,57 @@ print bigname, bigcount
 "if" => "You need to use one or more if statements to skip the lines that do not start with 'From '.",
 "raw_input" => "You should prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.")
+),
+
+"10.2" => Array(
+"qtext" => "<b>10.2</b> Write a program to read through the <b>mbox-short.txt</b> and figure
+out the distribution by hour of the day for each of the messages.  You can pull the hour
+out from the 'From ' line by finding the time and then splitting the string a second time
+using a colon.
+<pre>
+From stephen.marquard@uct.ac.za Sat Jan  5 <b>09</b>:14:16 2008
+</pre>
+Once you have accumulated the counts for each hour, print out the counts, sorted by hour 
+as shown below.",
+"desired" => "04 3
+06 1
+07 1
+09 2
+10 3
+11 6
+14 1
+15 2
+16 4
+17 2
+18 1
+19 1",
+"code" => 'name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+',
+"xcode" => 'name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+counts = dict()
+for line in handle:
+    wds = line.split()
+    if len(wds) < 5 : continue
+    if wds[0] != "From" : continue
+    when = wds[5]
+    tics = when.split(":")
+    if len(tics) != 3 : continue
+    hour = tics[0]
+    counts[hour] = counts.get(hour,0) + 1
+
+lst = counts.items()
+lst.sort()
+
+for key, val in lst :
+    print key, val
+',
+"checks" => Array(
+"for" => "You need a for loop to read the lines in the file.",
+"sort" => "You need to use list sort() method to sort the list of times.") 
 )
 
 
