@@ -237,7 +237,13 @@ At the end of the program print out the list.",
 "desired" => "['But', 'soft', 'what', 'light', 'through', 'yonder', 'window', 'breaks', 'It', 'is', 'the', 'east', 'and', 'Juliet', 'sun', 'Arise', 'fair', 'kill', 'envious', 'moon', 'Who', 'already', 'sick', 'pale', 'with', 'grief']",
 "code" => 'fname = raw_input("Enter file name: ")
 fh = open(fname)
-lst = []
+lst = list()
+for line in fh:
+    print line.rstrip()
+',
+"xcode" => 'fname = raw_input("Enter file name: ")
+fh = open(fname)
+lst = list()
 for line in fh:
     words = line.split()
     for word in words:
@@ -246,14 +252,80 @@ for line in fh:
 print lst
 ',
 "checks" => Array(
-"raw_input" => "You must prompt for the file name using the raw_input() function.",
+"split" => "You should use split() to break each line into words.",
+"append" => "You should use append() to add the word to the list if it is not there.",
+"raw_input" => "You should prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.",
-"find" => "You should use the find function to get the position of the colon in the string.",
-":" => "You should use string slicing [n:m] to extract data from the string.",
-"float" => "You should use the float() function to convert from a string to an integer.",
-'!18518' =>  "You must actually pull the data from the strings and convert it.",
-"/" => "Average is usually a total / count.")
+"for" => "You need two for loops. One for the lines and one for the words on each line.")
+),
+
+"8.5" => Array(
+"qtext" => "<b>8.5</b> Open the file <b>mbox-short.txt</b> and read it line by
+line.  When you find a line that starts with 'From ' like the following line:
+<pre>
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+</pre>
+You will parse the From line using split() and print out the second word in the line
+(i.e. the entire address of the person who sent the message).  Then print out 
+a count at the end.  <br/>
+<b>Hint:</b> make sure not to include the lines that start with 'From:'.",
+"desired" => "stephen.marquard@uct.ac.za
+louis@media.berkeley.edu
+zqian@umich.edu
+rjlowe@iupui.edu
+zqian@umich.edu
+rjlowe@iupui.edu
+cwen@iupui.edu
+cwen@iupui.edu
+gsilver@umich.edu
+gsilver@umich.edu
+zqian@umich.edu
+gsilver@umich.edu
+wagnermr@iupui.edu
+zqian@umich.edu
+antranig@caret.cam.ac.uk
+gopal.ramasammycook@gmail.com
+david.horwitz@uct.ac.za
+david.horwitz@uct.ac.za
+david.horwitz@uct.ac.za
+david.horwitz@uct.ac.za
+stephen.marquard@uct.ac.za
+louis@media.berkeley.edu
+louis@media.berkeley.edu
+ray@media.berkeley.edu
+cwen@iupui.edu
+cwen@iupui.edu
+cwen@iupui.edu
+There were 27 lines in the file with From as the first word",
+"code" => 'fname = raw_input("Enter file name: ")
+if len(fname) < 1 : fname = "mbox-short.txt"
+
+fh = open(fname)
+count = 0
+
+print "There were", count, "lines in the file with From as the first word"
+',
+"xcode" => 'fname = raw_input("Enter file name: ")
+if len(fname) < 1 : fname = "mbox-short.txt"
+
+fh = open(fname)
+count = 0
+for line in fh:
+    wds = line.split()
+    if len(wds) < 2 : continue
+    if wds[0] != "From" : continue
+    print wds[1]
+    count = count + 1
+print "There were", count, "lines in the file with From as the first word"
+',
+"checks" => Array(
+"for" => "You need a for loop to read the lines in the file.",
+"split" => "You should use split() to break each line into words.",
+"if" => "You need to use one or more if statements to skip the lines that do not start with 'From '.",
+"raw_input" => "You should prompt for the file name using the raw_input() function.",
+"open" => "You need to use open() to open the file.")
 )
+
 
 );
 ?>

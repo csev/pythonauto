@@ -294,7 +294,7 @@ if ( ! $context->valid && isset($_GET["done"]) ) {
 <span id="gradebad" style="color:red;display:none"> Error storing grade. </span>
 <br/>
 Enter Your Python Code Here:<br/>
-<textarea id="code" cols="80" style="font-family:fixed;font-size:16px;color:blue;width:99%;">
+<textarea id="code" cols="80" style="font-family:Courier,fixed;font-size:16px;color:blue;width:99%;">
 <?php echo($CODE); ?>
 </textarea>
 </form>
