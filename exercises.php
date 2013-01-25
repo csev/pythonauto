@@ -205,6 +205,7 @@ print text.upper()
 "raw_input" => "You must prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.",
 "print" => "You must use the print statement to print the lines.",
+"strip" => "You should use strip() or rstrip() to avoid double newlines.  You may need to scroll down to see a mis-match of the output.",
 "upper" => "You should use the upper() function to convert the lines to upper case.")
 ),
 
