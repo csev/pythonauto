@@ -55,20 +55,27 @@ print count,"Lines"
 ';
 $CHECKS = false;
 $ex = "count";
+$EX = true;
 
 if ( isset($_REQUEST["exercise"]) ) {
     $ex = $_REQUEST["exercise"];
     $EX = false;
     if ( isset($EXERCISES[$ex]) ) $EX = $EXERCISES[$ex];
-    if ( $EX !== false ) {
+    if ( $EX === false ) {
         $CODE = '';
         $QTEXT = $EX["qtext"];
         $DESIRED = $EX["desired"];
         if ( isset($EX["code"]) ) $CODE = $EX["code"];
         if ( isset($EX["checks"]) ) $CHECKS = json_encode($EX["checks"]);
     }
-}
+} 
+
 $DESIRED = rtrim($DESIRED);
+if ( $EX === false ) {
+    echo("</head><body><h1>Error, exercise ".htmlentities($ex).
+        " is not available.  Please see your instructor.</h1></body>");
+    return;
+}
 ?>
 <style>
 body { font-family: sans-serif; }
