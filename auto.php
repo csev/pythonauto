@@ -80,9 +80,17 @@ if ( $EX === false ) {
 <style>
 body { font-family: sans-serif; }
 </style>
-<script src="dist/skulpt.js?v=8" type="text/javascript"></script>
-<script src="dist/jquery.min.js?v=8" type="text/javascript"></script> 
+<script src="dist/skulpt.js?v=1" type="text/javascript"></script>
+<script src="dist/builtin.js?v=1" type="text/javascript"></script>
+<script src="dist/jquery.min.js?v=1" type="text/javascript"></script> 
 <script type="text/javascript">
+
+function builtinRead(x)
+{
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+        throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+}
 
 function makefilediv(name,text) {
     var msgContainer = document.createElement('div');
@@ -213,7 +221,7 @@ $(document).ready( function() {
         output.innerHTML = '';
         if ( window.GLOBAL_TIMER != false ) window.clearInterval(window.GLOBAL_TIMER);
         window.GLOBAL_TIMER = setTimeout("finalcheck();",2500);
-        Sk.configure({output:outf});
+        Sk.configure({output:outf, read: builtinRead});
         try {
             var module = Sk.importMainWithBody("<stdin>", false, prog);
         } catch (e) {
