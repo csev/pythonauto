@@ -168,7 +168,11 @@ number and print it out.",
 "7.1" => Array(
 "qtext" => "<b>7.1</b> Write a program that prompts for a file name, then opens that file
 and reads through the file, and print the contents of the file in upper case.  Use
-the file <b>words.txt</b> to produce the output below.",
+the file <b>words.txt</b> to produce the output below.".
+'<p>
+You can download the sample data at 
+<a href="http://www.pythonlearn.com/code/words.txt" target="_blank">
+http://www.pythonlearn.com/code/words.txt</a>',
 "desired" => "WRITING PROGRAMS OR PROGRAMMING IS A VERY CREATIVE
 AND REWARDING ACTIVITY  YOU CAN WRITE PROGRAMS FOR
 MANY REASONS RANGING FROM MAKING YOUR LIVING TO SOLVING
@@ -210,13 +214,17 @@ print text.upper()
 ),
 
 "7.2" => Array(
-"qtext" => "<b>7.2</b> Write a program that prompts for a file name, then opens that file
+"qtext" => '<b>7.2</b> Write a program that prompts for a file name, then opens that file
 and reads through the file, looking for lines of the form:
 <pre>
 X-DSPAM-Confidence:    0.8475
 </pre>
 Count these lines and extract the floating point values form each of the lines and 
-Open the file <b>mbox-short.txt</b> to produce the output below.",
+Open the file <b>mbox-short.txt</b> to produce the output below.
+<p>
+You can download the sample data at 
+<a href="http://www.pythonlearn.com/code/mbox-short.txt" target="_blank">
+http://www.pythonlearn.com/code/mbox-short.txt</a>',
 "desired" => "Average spam confidence: 0.7507185185185187",
 "code" => 'fname = raw_input("Enter file name: ")
 fh = open(fname)
@@ -236,17 +244,21 @@ print "Done"
 ),
 
 "8.4" => Array(
-"qtext" => "<b>8.4</b> Open the file <b>romeo.txt</b> and read it line by
+"qtext" => '<b>8.4</b> Open the file <b>romeo.txt</b> and read it line by
 line.  For each line, split the line into a list of words using the <b>split()</b>
 function.   The program should build a list of words.  For each word on each line
 check to see if the word is already in the list and if not append it to the list.
-At the end of the program print out the list.",
-"desired" => "['But', 'soft', 'what', 'light', 'through', 'yonder', 'window', 'breaks', 'It', 'is', 'the', 'east', 'and', 'Juliet', 'sun', 'Arise', 'fair', 'kill', 'envious', 'moon', 'Who', 'already', 'sick', 'pale', 'with', 'grief']",
+When the program completes, sort and print the resulting words in alphabetical order.
+<p>
+You can download the sample data at 
+<a href="http://www.pythonlearn.com/code/romeo.txt" target="_blank">
+http://www.pythonlearn.com/code/romeo.txt</a>',
+"desired" => "['Arise', 'But', 'It', 'Juliet', 'Who', 'already', 'and', 'breaks', 'east', 'envious', 'fair', 'grief', 'is', 'kill', 'light', 'moon', 'pale', 'sick', 'soft', 'sun', 'the', 'through', 'what', 'window', 'with', 'yonder']",
 "code" => 'fname = raw_input("Enter file name: ")
 fh = open(fname)
 lst = list()
 for line in fh:
-    print line.rstrip()
+print line.rstrip()
 ',
 "xcode" => 'fname = raw_input("Enter file name: ")
 fh = open(fname)
@@ -256,6 +268,7 @@ for line in fh:
     for word in words:
         if word in lst: continue
         lst.append(word)
+lst.sort()
 print lst
 ',
 "checks" => Array(
@@ -263,6 +276,7 @@ print lst
 "append" => "You should use append() to add the word to the list if it is not there.",
 "raw_input" => "You should prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.",
+"sort" => "You need to use sort() to sort the list before you print it out.",
 "for" => "You need two for loops. One for the lines and one for the words on each line.")
 ),
 
@@ -274,8 +288,13 @@ From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
 </pre>
 You will parse the From line using split() and print out the second word in the line
 (i.e. the entire address of the person who sent the message).  Then print out 
-a count at the end.  <br/>
-<b>Hint:</b> make sure not to include the lines that start with 'From:'.",
+a count at the end.
+<p>
+<b>Hint:</b> make sure not to include the lines that start with 'From:'.".
+'<p>
+You can download the sample data at 
+<a href="http://www.pythonlearn.com/code/mbox-short.txt" target="_blank">
+http://www.pythonlearn.com/code/mbox-short.txt</a>',
 "desired" => "stephen.marquard@uct.ac.za
 louis@media.berkeley.edu
 zqian@umich.edu
