@@ -110,15 +110,19 @@ Do not worry about error checking the user input unless you want to -
 you can assume the user types numbers properly.
 ",
 "desired" => "Pay: 475",
-"code" => 'hrs = raw_input("Enter Hours:")
-h = float(hrs)',
+"code" => 'def computepay(h,r):
+    return 42.37
+
+hrs = raw_input("Enter Hours:")
+p = computepay(10,20)
+print "Pay",p',
 "checks" => Array(
 "raw_input" => "You must prompt the pay and rate using the raw_input() function.",
 "print" => "You must use the print statement to print the output.",
 "if" => "You should use an if statement to decide to to the overtime computation or not.",
 "float" => "You should use the built-in float() function to convert from a string to a float.",
 "def" => "You must use a function called computepay to do the computation.",
-"return" => "You must use a function called computepay to do the computation.",
+"return" => "You must use a return statement to pass the comptuer pay back to the main code.",
 "computepay" => "You must use a function called computepay to do the computation.",
 "!475" => "You must actually calculate the pay.")
 ),
@@ -236,8 +240,6 @@ print "Done"
 "checks" => Array(
 "raw_input" => "You must prompt for the file name using the raw_input() function.",
 "open" => "You need to use open() to open the file.",
-"find" => "You should use the find function to get the position of the colon in the string.",
-":" => "You should use string slicing [n:m] to extract data from the string.",
 "float" => "You should use the float() function to convert from a string to an integer.",
 '!18518' =>  "You must actually pull the data from the strings and convert it.",
 "/" => "Average is usually a total / count.")
@@ -401,7 +403,7 @@ using a colon.
 From stephen.marquard@uct.ac.za Sat Jan  5 <b>09</b>:14:16 2008
 </pre>
 Once you have accumulated the counts for each hour, print out the counts, sorted by hour 
-as shown below.",
+as shown below.  Note that the autograder does not have support for the sorted() function.",
 "desired" => "04 3
 06 1
 07 1
