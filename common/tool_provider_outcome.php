@@ -62,6 +62,8 @@ $oauth_consumer_key = $_REQUEST['key'];
 $method="POST";
 $endpoint = $_REQUEST['url'];
 $content_type = "application/xml";
+// http://stackoverflow.com/questions/2822774/php-is-htmlentities-sufficient-for-creating-xml-safe-values
+$sourcedid = htmlspecialchars($sourcedid);
 
 if ( $_REQUEST['submit'] == "Send Grade" && isset($_REQUEST['grade'] ) ) {
     $operation = 'replaceResultRequest';

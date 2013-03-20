@@ -35,6 +35,7 @@ if ( isset($_SESSION['oauth_consumer_key']) && isset($_SESSION['oauth_consumer_s
 
 $method="POST";
 $content_type = "application/xml";
+$sourcedid = htmlspecialchars($sourcedid);
 
 $operation = 'replaceResultRequest';
 $postBody = str_replace(
