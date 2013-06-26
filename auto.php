@@ -289,9 +289,12 @@ word-wrap: break-word; /* IE 5.5+ */
 <button onclick="runit()" type="button">Check Code</button>
 <?php
 if ( $context->valid && $context->getOutcomeService() !== false ) {
+   if ( $context->isInstructor() ){
 ?>
+<span id="grade" style="display:none">To test grading launch as a Learner.</span>
+<?php } else { ?>
 <button id="grade" onclick="gradeit()" type="button" style="display:none">Submit Grade</button>
-<?php } ?>
+<?php } } ?>
 <?php
 if ( ! $context->valid && isset($_GET["done"]) ) {
   $url = $_GET['done'];
@@ -304,7 +307,7 @@ if ( ! $context->valid && isset($_GET["done"]) ) {
 <span id="gradegood" style="color:green;display:none"> Grade Updated. </span>
 <span id="gradebad" style="color:red;display:none"> Error storing grade. </span>
 <br/>
-Enter Your Python Code Here:<br/>
+Enter/Edit Your Python Code Here:<br/>
 <textarea id="code" cols="80" style="font-family:Courier,fixed;font-size:16px;color:blue;width:99%;">
 <?php echo($CODE); ?>
 </textarea>
