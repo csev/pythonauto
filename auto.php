@@ -10,6 +10,7 @@ header('Content-Type: text/html; charset=utf-8');
 // Why not?
 $oauth_consumer_key = "12345";
 $oauth_consumer_secret = "secret";
+$referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
 
 if ( ! is_lti_request() ) {
     // Initialize, no secret, pull from session, and do not redirect
@@ -27,9 +28,11 @@ if ( ! is_lti_request() ) {
     // Initialize, all secrets are 'secret', set session, and do not redirect
     $context = new BLTI($oauth_consumer_secret, true, false);
     if ( ! $context->valid ) {
-        echo("<h1>Error: Incorrect LTI secret</h1>");
+        echo("<h1>Error: Unable to establish LTI session</h1>");
+        error_log("Error: Unable to establish LTI session");
         return;
     }
+    error_log("Logged in");
     $_SESSION['oauth_consumer_secret'] = $oauth_consumer_secret;
     $_SESSION['oauth_consumer_key'] = $oauth_consumer_key;
 }
