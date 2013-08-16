@@ -7,6 +7,19 @@ require_once 'util/lti_util.php';
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
+function dump() {
+    global $last_base_string;
+    print "<pre>\n";
+    print "Raw POST Parameters:\n\n";
+    ksort($_POST);
+    foreach($_POST as $key => $value ) {
+    if (get_magic_quotes_gpc()) $value = stripslashes($value);
+        print htmlentities($key) . "=" . htmlentities($value) . " (".mb_detect_encoding($value).")\n";
+    }
+    print "</pre>\n";
+    echo($last_base_string);
+}
+
 // Why not?
 $oauth_consumer_key = "12345";
 $oauth_consumer_secret = "secret";
@@ -29,6 +42,8 @@ if ( ! is_lti_request() ) {
     $context = new BLTI($oauth_consumer_secret, true, false);
     if ( ! $context->valid ) {
         echo("<h1>Error: Unable to establish LTI session</h1>");
+        echo($context->message);
+        dump();
         error_log("Error: Unable to establish LTI session");
         return;
     }
