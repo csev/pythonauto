@@ -151,9 +151,7 @@ print "Maximum", largest',
 "while" => "You should use a while statement to read the numbers.",
 "int" => "You should use the int() function to convert from a string to an integer.",
 "try" => "You should handle bad numbers using a try/except structure.",
-"except" => "You should handle bad numbers using a try/except structure.",
-"!4" => "You must actually calculate the minimum.",
-"!7" => "You must actually calculate the maximum.")
+"except" => "You should handle bad numbers using a try/except structure.")
 ),
 
 "6.5" => Array(
