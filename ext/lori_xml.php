@@ -1,13 +1,13 @@
 <html>
 <head>
-  <title>IMS Learning Tools Interoperability</title>
+  <title>Sakai Lessons API</title>
 </head>
 <body style="font-family:sans-serif; background-color:#add8e6">
-<p><b>Tool Provider Calling the IMS LIS/LTI Outcome Service</b></p>
-<p>This is a simple implementation of the Simple Outcomes Service.</p>
+<p><b>Calling the Sakai Lessons API</b></p>
 <?php 
 // Load up the LTI Support code
 require_once("../util/lti_util.php");
+require_once("lori_xml_messages.php");
 
 // Note - We avoid using the session in this file to avoid deadlocks
 // If we were calling a web service on the same server
@@ -23,66 +23,49 @@ ini_set("display_errors", 1);
 $oauth_consumer_secret = $_REQUEST['secret'];
 if (strlen($oauth_consumer_secret) < 1 ) $oauth_consumer_secret = 'secret';
 
-$sourcedid = $_REQUEST['sourcedid'];
+$sourcedid = $_REQUEST['context_id'];
 if (get_magic_quotes_gpc()) $sourcedid = stripslashes($sourcedid);
+
+$user_id = $_REQUEST['user_id'];
+$context_id = $_REQUEST['context_id'];
+$lis_result_sourcedid = $_REQUEST['lis_result_sourcedid'];
+$folderId = $_REQUEST['folderId'];
 
 ?>
 <p>
 <form method="POST">
 Service URL: <input type="text" name="url" size="100" disabled="true" value="<?php echo(htmlentities($_REQUEST['url']));?>"/></br>
-lis_result_sourcedid: <input type="text" name="sourcedid" disabled="true" size="100" value="<?php echo(htmlentities($sourcedid));?>"/></br>
+user_id: <input type="text" name="user_id" disabled="true" size="100" value="<?php echo(htmlentities($user_id));?>"/></br>
+context_id: <input type="text" name="context_id" disabled="true" size="100" value="<?php echo(htmlentities($context_id));?>"/></br>
 OAuth Consumer Key: <input type="text" name="key" disabled="true" size="80" value="<?php echo(htmlentities($_REQUEST['key']));?>"/></br>
 OAuth Consumer Secret: <input type="text" name="secret" size="80" value="<?php echo(htmlentities($oauth_consumer_secret));?>"/></br>
 </p><p>
-Grade to Send to LMS: <input type="text" name="grade" value="<?php echo(htmlentities($_REQUEST['grade']));?>"/>
-(i.e. 0.95)<br/>
-<input type='submit' name='submit' value="Send Grade">
-<input type='submit' name='submit' value="Read Grade">
-<input type='submit' name='submit' value="Delete Grade"></br>
+lis_result_sourcedid: <input type="text" name="lis_result_sourcedid" size="80" value="<?php echo(htmlentities($_REQUEST['lis_result_sourcedid']));?>"/></br>
+folderId: <input type="text" name="folderId" size="80" value="<?php echo(htmlentities($_REQUEST['folderId']));?>"/></br>
+<input type='submit' name='submit' value="Get Course Structure">
+<input type='submit' name='submit' value="Add Course Resource">
+</br>
 </form>
 <?php 
 $url = $_REQUEST['url'];
-if(!in_array($_SERVER['HTTP_HOST'],array('localhost','127.0.0.1')) && strpos($url,'localhost') > 0){ ?>
-<p>
-<b>Note</b> This service call may not work.  It appears as though you are 
-calling a service running on <b>localhost</b> from a tool that
-is not running on localhost.
-Because these services are server-to-server calls if you are 
-running your LMS on "localhost", you must also run this script
-on localhost as well.  If your LMS has a real Internet
-address you should be OK.  You can get a copy of the test
-tools to run locally at 
-to test your LMS instance running on localhost.
-(<a href="../lti.zip" target="_new">Download</a>) 
-</p>
-<?php
-}
 
 $oauth_consumer_key = $_REQUEST['key'];
 $method="POST";
 $endpoint = $_REQUEST['url'];
 $content_type = "application/xml";
-// http://stackoverflow.com/questions/2822774/php-is-htmlentities-sufficient-for-creating-xml-safe-values
-$sourcedid = htmlspecialchars($sourcedid);
 
-if ( $_REQUEST['submit'] == "Send Grade" && isset($_REQUEST['grade'] ) ) {
-    $operation = 'replaceResultRequest';
+if ( $_REQUEST['submit'] == "Get Course Structure" && isset($_REQUEST['context_id'] ) &&
+    isset($_REQUEST['lis_result_sourcedid'] ) ) {
     $postBody = str_replace(
-	array('SOURCEDID', 'GRADE', 'OPERATION','MESSAGE'), 
-	array($sourcedid, $_REQUEST['grade'], $operation, uniqid()), 
-	getPOXGradeRequest());
-} else if ( $_REQUEST['submit'] == "Read Grade" ) {
-    $operation = 'readResultRequest';
+	array('USER_ID', 'CONTEXT_ID','LIS_RESULT_SOURCEDID', 'MESSAGE'), 
+	array($user_id, $context_id, htmlentities($lis_result_sourcedid), uniqid()), 
+	$getCourseStructureRequest);
+} else if ( $_REQUEST['submit'] == "Add Course Resource" && isset($_REQUEST['context_id'] ) &&
+    isset($_REQUEST['lis_result_sourcedid'] ) ) {
     $postBody = str_replace(
-	array('SOURCEDID', 'OPERATION','MESSAGE'), 
-	array($sourcedid, $operation, uniqid()), 
-	getPOXRequest());
-} else if ( $_REQUEST['submit'] == "Delete Grade" ) {
-    $operation = 'deleteResultRequest';
-    $postBody = str_replace(
-	array('SOURCEDID', 'OPERATION','MESSAGE'), 
-	array($sourcedid, $operation, uniqid()), 
-	getPOXRequest());
+	array('USER_ID', 'CONTEXT_ID','LIS_RESULT_SOURCEDID', 'FOLDER_ID', 'MESSAGE'), 
+	array($user_id, $context_id, htmlentities($lis_result_sourcedid), $folderId, uniqid()), 
+	$addCourseResourcesRequest);
 } else {
     exit();
 }

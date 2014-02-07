@@ -122,7 +122,7 @@ print "Pay",p',
 "if" => "You should use an if statement to decide to to the overtime computation or not.",
 "float" => "You should use the built-in float() function to convert from a string to a float.",
 "def" => "You must use a function called computepay to do the computation.",
-"return" => "You must use a return statement to pass the comptuer pay back to the main code.",
+"return" => "You must use a return statement to pass the computed pay back to the main code.",
 "computepay" => "You must use a function called computepay to do the computation.",
 "!475" => "You must actually calculate the pay.")
 ),
@@ -199,10 +199,12 @@ COMPUTER TO DO TASKS ON OUR BEHALF THAT WERE REPTITIVE
 INTERESTINGLY, THE KINDS OF THINGS COMPUTERS CAN DO BEST
 ARE OFTEN THE KINDS OF THINGS THAT WE HUMANS FIND BORING
 AND MIND-NUMBING",
-"code" => 'fname = raw_input("Enter file name: ")
+"code" => '# Use words.txt as the file name
+fname = raw_input("Enter file name: ")
 fh = open(fname)
 ',
-"xcode" => 'fname = raw_input("Enter file name: ")
+"xcode" => '# Use words.txt as the file name
+fname = raw_input("Enter file name: ")
 fh = open(fname)
 text = fh.read().strip()
 print text.upper()
@@ -221,19 +223,34 @@ and reads through the file, looking for lines of the form:
 <pre>
 X-DSPAM-Confidence:    0.8475
 </pre>
-Count these lines and extract the floating point values form each of the lines and 
-Open the file <b>mbox-short.txt</b> to produce the output below.
+Count these lines and extract the floating point values from each 
+of the lines and coput the average of those values and produce an output
+as shown below.
 <p>
 You can download the sample data at 
 <a href="http://www.pythonlearn.com/code/mbox-short.txt" target="_blank">
-http://www.pythonlearn.com/code/mbox-short.txt</a>',
+http://www.pythonlearn.com/code/mbox-short.txt</a> when you are testing 
+below enter <b>mbox-short.txt</b> as the file name.',
 "desired" => "Average spam confidence: 0.7507185185185187",
-"code" => 'fname = raw_input("Enter file name: ")
+"code" => '# Use the file name mbox-short.txt as the file name
+fname = raw_input("Enter file name: ")
 fh = open(fname)
 for line in fh:
     if not line.startswith("X-DSPAM-Confidence:") : continue
     print line
 print "Done"
+',
+"xcode" => '# Use the file name mbox-short.txt as the file name
+fname = raw_input("Enter file name: ")
+fh = open(fname)
+tot = 0.0
+count = 0
+for line in fh:
+    if not line.startswith("X-DSPAM-Confidence:") : continue
+    words = line.split()
+    tot = tot + float(words[1])
+    count = count + 1
+print "Average spam confidence:", tot/count
 ',
 "checks" => Array(
 "raw_input" => "You must prompt for the file name using the raw_input() function.",

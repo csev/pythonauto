@@ -7,9 +7,23 @@ require_once 'util/lti_util.php';
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
+function dump() {
+    global $last_base_string;
+    print "<pre>\n";
+    print "Raw POST Parameters:\n\n";
+    ksort($_POST);
+    foreach($_POST as $key => $value ) {
+    if (get_magic_quotes_gpc()) $value = stripslashes($value);
+        print htmlentities($key) . "=" . htmlentities($value) . " (".mb_detect_encoding($value).")\n";
+    }
+    print "</pre>\n";
+    echo($last_base_string);
+}
+
 // Why not?
 $oauth_consumer_key = "12345";
 $oauth_consumer_secret = "secret";
+$referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
 
 if ( ! is_lti_request() ) {
     // Initialize, no secret, pull from session, and do not redirect
@@ -27,9 +41,13 @@ if ( ! is_lti_request() ) {
     // Initialize, all secrets are 'secret', set session, and do not redirect
     $context = new BLTI($oauth_consumer_secret, true, false);
     if ( ! $context->valid ) {
-        echo("<h1>Error: Incorrect LTI secret</h1>");
+        echo("<h1>Error: Unable to establish LTI session</h1>");
+        echo($context->message);
+        dump();
+        error_log("Error: Unable to establish LTI session");
         return;
     }
+    error_log("Logged in");
     $_SESSION['oauth_consumer_secret'] = $oauth_consumer_secret;
     $_SESSION['oauth_consumer_key'] = $oauth_consumer_key;
 }
@@ -286,9 +304,12 @@ word-wrap: break-word; /* IE 5.5+ */
 <button onclick="runit()" type="button">Check Code</button>
 <?php
 if ( $context->valid && $context->getOutcomeService() !== false ) {
+   if ( $context->isInstructor() ){
 ?>
+<span id="grade" style="display:none">To test grading launch as a Learner.</span>
+<?php } else { ?>
 <button id="grade" onclick="gradeit()" type="button" style="display:none">Submit Grade</button>
-<?php } ?>
+<?php } } ?>
 <?php
 if ( ! $context->valid && isset($_GET["done"]) ) {
   $url = $_GET['done'];
@@ -301,7 +322,7 @@ if ( ! $context->valid && isset($_GET["done"]) ) {
 <span id="gradegood" style="color:green;display:none"> Grade Updated. </span>
 <span id="gradebad" style="color:red;display:none"> Error storing grade. </span>
 <br/>
-Enter Your Python Code Here:<br/>
+Enter/Edit Your Python Code Here:<br/>
 <textarea id="code" cols="80" style="font-family:Courier,fixed;font-size:16px;color:blue;width:99%;">
 <?php echo($CODE); ?>
 </textarea>
